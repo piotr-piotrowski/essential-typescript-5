@@ -1,13 +1,24 @@
-function calculatePrice(quantity, price) {
-    return quantity * price;
-}
-let total = calculatePrice(2, 19.99);
-console.log(`Price: ${total}`);
-function getRandomValue() {
-    return Math.floor(Math.random() * 4) + 1;
-}
-function getCityString(city) {
-    return `City: ${city}`;
-}
-let str = getCityString("London");
-console.log(str);
+let Employee = function (id, name, dept, city) {
+    this.id = id;
+    this.name = name;
+    this.dept = dept;
+    this.city = city;
+};
+Employee.prototype.writeDept = function () {
+    console.log(`${this.name} works in ${this.dept}`);
+};
+let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
+let data = [
+    { id: "bsmith", name: "Bob Smith", city: "Lodon" },
+    { id: "ajones", name: "Alice Jones", city: "Paris" },
+    { id: "dpeters", name: "Dora Peters", city: "New York" },
+    salesEmployee,
+];
+data.forEach((item) => {
+    if (item instanceof Employee) {
+        item.writeDept();
+    }
+    else {
+        console.log(`${item.id} ${item.name}, ${item.city}`);
+    }
+});
