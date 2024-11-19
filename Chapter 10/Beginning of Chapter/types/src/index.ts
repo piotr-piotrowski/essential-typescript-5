@@ -5,20 +5,12 @@ type Person = {
 };
 
 class Employee {
-  public readonly id: string;
-  public name: string;
-  #dept: string;
-  public city: string;
 
-  constructor(id: string, name: string, dept: string, city: string) {
-    this.id = id;
-    this.name = name;
-    this.#dept = dept;
-    this.city = city;
+  constructor(public readonly id: string, public name: string, private dept: string, public city: string) {
   }
 
   writeDept() {
-    console.log(`${this.name} works in ${this.#dept}`);
+    console.log(`${this.name} works in ${this.dept}`);
   }
 }
 
