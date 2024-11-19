@@ -5,7 +5,7 @@ type Person = {
 };
 
 class Employee {
-  public id: string;
+  public readonly id: string;
   public name: string;
   #dept: string;
   public city: string;
@@ -23,6 +23,8 @@ class Employee {
 }
 
 let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
+salesEmployee.writeDept()
+// salesEmployee.id = 'abc'; // src/index.ts(27,15): error TS2540: Cannot assign to 'id' because it is a read-only property.
 
 let data: (Person | Employee)[] = [
   { id: "bsmith", name: "Bob Smith", city: "Lodon" },
