@@ -1,6 +1,15 @@
-let hat = { name: "Hat", price: 100 };
-let gloves = { name: "Gloves", price: 75 };
+type Person = {
+  id: string;
+  name: string;
+  city: string;
+};
 
-let products = [hat, gloves];
+let data: Person[] = [
+  { id: "bsmith", name: "Bob Smith", city: "Lodon" },
+  { id: "ajones", name: "Alice Jones", city: "Paris" },
+  { id: "dpeters", name: "Dora Peters", city: "New York" },
+];
 
-products.forEach(prod => console.log(`${prod.name}: ${prod.price}`));
+data.forEach((item) => {
+  console.log(`${item.id} ${item.name}, ${item.city}`);
+});
