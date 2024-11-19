@@ -1,8 +1,15 @@
-declare function calculatePrice(quantity: 1 | 2, price: number): number;
-declare let total: number;
-type numVals = 1 | 2 | 3 | 4;
-declare function getRandomValue(): numVals;
-type cities = "London" | "Paris" | "Chicago";
-type cityResponse = `City: ${cities}`;
-declare function getCityString(city: cities): cityResponse;
-declare let str: "City: London" | "City: Paris" | "City: Chicago";
+type Person = {
+    id: string;
+    name: string;
+    city: string;
+};
+type Employee = {
+    id: string;
+    name: string;
+    dept: string;
+    city: string;
+    writeDept: () => void;
+};
+declare let Employee: (id: string, name: string, dept: string, city: string) => void;
+declare let salesEmployee: any;
+declare let data: (Person | Employee)[];

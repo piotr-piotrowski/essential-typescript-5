@@ -1,8 +1,16 @@
 type Person = {
-  id: string;
-  name: string;
-  city: string;
+  id: string,
+  name: string,
+  city: string,
 };
+
+type Employee = {
+  id: string,
+  name: string,
+  dept: string,
+  city: string,
+  writeDept: () => void
+}
 
 let Employee = function (id: string, name: string, dept: string, city: string) {
   this.id = id;
@@ -10,6 +18,7 @@ let Employee = function (id: string, name: string, dept: string, city: string) {
   this.dept = dept;
   this.city = city;
 };
+
 Employee.prototype.writeDept = function () {
   console.log(`${this.name} works in ${this.dept}`);
 };
@@ -24,7 +33,7 @@ let data: (Person | Employee)[] = [
 ];
 
 data.forEach((item) => {
-  if (item instanceof Employee) {
+  if ("dept" in item) {
     item.writeDept();
   } else {
     console.log(`${item.id} ${item.name}, ${item.city}`);
