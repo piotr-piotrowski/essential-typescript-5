@@ -13,7 +13,14 @@ class Employee {
         console.log(`${this.name} works in ${this.dept}`);
     }
     get location() {
-        return this.city;
+        switch (this.city) {
+            case "Paris":
+                return "France";
+            case "London":
+                return "UK";
+            default:
+                return this.city;
+        }
     }
     set location(newCity) {
         this.city = newCity;
@@ -23,7 +30,7 @@ let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
 salesEmployee.writeDept();
 // salesEmployee.id = 'abc'; // src/index.ts(27,15): error TS2540: Cannot assign to 'id' because it is a read-only property.
 console.log(`Location: ${salesEmployee.location}`);
-salesEmployee.location = 'London';
+salesEmployee.location = "London";
 console.log(`Location: ${salesEmployee.location}`);
 let data = [
     { id: "bsmith", name: "Bob Smith", city: "Lodon" },
