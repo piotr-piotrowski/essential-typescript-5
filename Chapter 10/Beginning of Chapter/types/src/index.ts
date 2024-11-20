@@ -34,6 +34,8 @@ class Employee {
   get details() {
     return `${this.name}, ${this.dept}, ${this.location}`;
   }
+
+  accessor salary: number = 100_000
 }
 
 let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
@@ -41,6 +43,8 @@ salesEmployee.writeDept();
 // salesEmployee.id = 'abc'; // src/index.ts(27,15): error TS2540: Cannot assign to 'id' because it is a read-only property.
 console.log(`Location: ${salesEmployee.location}`);
 console.log(`Details: ${salesEmployee.details}`);
+console.log(`Salary: ${salesEmployee.salary}`);
+
 
 let data: (Person | Employee)[] = [
   { id: "bsmith", name: "Bob Smith", city: "Lodon" },
