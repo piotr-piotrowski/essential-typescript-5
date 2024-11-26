@@ -1,14 +1,3 @@
-class Employee {
-    name;
-    company;
-    constructor(name, company) {
-        this.name = name;
-        this.company = company;
-    }
-    getDetails() {
-        return `${this.name} works for ${this.company}`;
-    }
-}
 class SportsProduct {
     name;
     category;
@@ -19,16 +8,14 @@ class SportsProduct {
         this.price = price;
     }
 }
-let data = [
-    new Employee("Bob Smith", "Acme"),
-    new SportsProduct("Running Shoes", "Running", 90.5),
-    new Employee("Dora Peters", "BigCo"),
-];
-data.forEach((item) => {
-    if ("getDetails" in item) {
-        console.log(`Person: ${item.getDetails()}`);
+class ProductGroup {
+    constructor(...initialProducts) {
+        initialProducts.forEach((p) => (this[p[0]] = p[1]));
     }
-    else {
-        console.log(`Product: ${item.name}, ${item.price}`);
-    }
-});
+}
+let group = new ProductGroup([
+    "shoes",
+    new SportsProduct("Shoes", "Running", 90.5),
+]);
+group.hat = new SportsProduct("Hat", "Skiing", 20);
+Object.keys(group).forEach((k) => console.log(`Property Name: ${k}`));
