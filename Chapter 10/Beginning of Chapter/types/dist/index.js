@@ -18,7 +18,5 @@ let group = new ProductGroup([
     new SportsProduct("Shoes", "Running", 90.5),
 ]);
 group.hat = new SportsProduct("Hat", "Skiing", 20);
-if (group.hat && group.boots) {
-    let total = group.hat.price + group.boots.price;
-    console.log(`Total: ${total}`);
-}
+let total = group.hat.price + (group.boots?.price ?? 0);
+console.log(`Total: ${total}`);
