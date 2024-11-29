@@ -23,6 +23,9 @@ class DataCollection<T> {
 }
 
 let peopleData = new DataCollection<Person>(people);
-
 let firstPerson = peopleData.getItem(0);
 console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
+
+let productData = new DataCollection<Product>(products);
+let firstProduct = productData.getItem(0);
+console.log(`First Product: ${firstProduct.name}, ${firstProduct.price}`);
