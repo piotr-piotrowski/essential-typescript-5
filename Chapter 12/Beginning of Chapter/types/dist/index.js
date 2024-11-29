@@ -1,20 +1,25 @@
-class SportsProduct {
-    name;
-    category;
-    price;
-    constructor(name, category, price) {
-        this.name = name;
-        this.category = category;
-        this.price = price;
-        // no statements required
+import { Person, Product } from "./dataTypes.js";
+let people = [
+    new Person("Bob Smith", "London"),
+    new Person("Dora Peters", "New York"),
+];
+let products = [new Product("Running Shoes", 100), new Product("Hat", 25)];
+class PeopleCollection {
+    items = [];
+    constructor(intialItems) {
+        this.items.push(...intialItems);
+    }
+    add(newItem) {
+        this.items.push(newItem);
+    }
+    getNames() {
+        return this.items.map((item) => item.name);
+    }
+    getItem(index) {
+        return this.items[index];
     }
 }
-class ProductGroup {
-    constructor(...initialProducts) {
-        initialProducts.forEach(p => this[p[0]] = p[1]);
-    }
-}
-let group = new ProductGroup(["shoes", new SportsProduct("Shoes", "Running", 90.50)]);
-group.hat = new SportsProduct("Hat", "Skiing", 20);
-let total = group.hat.price + (group.boots?.price ?? 0);
-console.log(`Total: ${total}`);
+let peopleData = new PeopleCollection(people);
+console.log(`Names: ${peopleData.getNames().join(", ")}`);
+let firstPerson = peopleData.getItem(0);
+console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
