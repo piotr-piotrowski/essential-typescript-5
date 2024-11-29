@@ -29,12 +29,11 @@ class SearchableCollection extends DataCollection {
     constructor(initialItems) {
         super(initialItems);
     }
-    find(name) {
-        return this.items.find((item) => item.name === name);
+    find(searchTerm) {
+        return this.items.filter((item) => item.name === searchTerm || item.role === searchTerm);
     }
 }
-let peopleData = new SearchableCollection(people);
-let foundPerson = peopleData.find("Bob Smith");
-if (foundPerson !== undefined) {
-    console.log(`Person ${foundPerson.name}, ${foundPerson.city}`);
-}
+let employeeData = new SearchableCollection(employees);
+employeeData
+    .find("Sales")
+    .forEach((e) => console.log(`Employee ${e.name}, ${e.role}`));
