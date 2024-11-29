@@ -4,7 +4,7 @@ let people = [
     new Person("Dora Peters", "New York"),
 ];
 let products = [new Product("Running Shoes", 100), new Product("Hat", 25)];
-class PeopleCollection {
+class DataCollection {
     items = [];
     constructor(intialItems) {
         this.items.push(...intialItems);
@@ -12,16 +12,10 @@ class PeopleCollection {
     add(newItem) {
         this.items.push(newItem);
     }
-    getNames() {
-        return this.items.map((item) => item.name);
-    }
     getItem(index) {
         return this.items[index];
     }
 }
-let peopleData = new PeopleCollection(people);
-console.log(`Names: ${peopleData.getNames().join(", ")}`);
+let peopleData = new DataCollection(people);
 let firstPerson = peopleData.getItem(0);
-if (firstPerson instanceof Person) {
-    console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
-}
+console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
