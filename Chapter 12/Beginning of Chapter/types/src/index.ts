@@ -11,7 +11,7 @@ let employees = [
   new Employee("Alice Jones", "Sales"),
 ];
 
-class DataCollection<T extends { name: string }, U> {
+class DataCollection<T extends { name: string }> {
   private items: T[] = [];
 
   constructor(intialItems: T[]) {
@@ -30,10 +30,10 @@ class DataCollection<T extends { name: string }, U> {
   }
 }
 
-let peopleData = new DataCollection<Person, City>(people);
-let collatedData = peopleData.collate<City>(cities, "city", "name");
+export let peopleData = new DataCollection(people);
+export let collatedData = peopleData.collate(cities, "city", "name");
 collatedData.forEach((c) =>
   console.log(`${c.name}, ${c.city}, ${c.population}`)
 );
-let empData = peopleData.collate<Employee>(employees, "name", "name");
+export let empData = peopleData.collate(employees, "name", "name");
 empData.forEach((c) => console.log(`${c.name}, ${c.city}, ${c.role}`));

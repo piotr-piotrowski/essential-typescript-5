@@ -25,8 +25,8 @@ class DataCollection {
         return results;
     }
 }
-let peopleData = new DataCollection(people);
-let collatedData = peopleData.collate(cities, "city", "name");
+export let peopleData = new DataCollection(people);
+export let collatedData = peopleData.collate(cities, "city", "name");
 collatedData.forEach((c) => console.log(`${c.name}, ${c.city}, ${c.population}`));
-let empData = peopleData.collate(employees, "name", "name");
+export let empData = peopleData.collate(employees, "name", "name");
 empData.forEach((c) => console.log(`${c.name}, ${c.city}, ${c.role}`));
