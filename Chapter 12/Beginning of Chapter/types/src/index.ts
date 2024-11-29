@@ -31,20 +31,24 @@ class DataCollection<T extends { name: string }> {
 }
 
 class SearchableCollection<
-  T extends { name: string }
-> extends DataCollection<Employee> {
-  constructor(initialItems: Employee[]) {
+  T extends Employee | Person
+> extends DataCollection<T> {
+  constructor(initialItems: T[]) {
     super(initialItems);
   }
 
-  find(searchTerm: string): Employee[] {
-    return this.items.filter(
-      (item) => item.name === searchTerm || item.role === searchTerm
-    );
+  find(searchTerm: string): T[] {
+    return this.items.filter((item) => {
+      if (item instanceof Employee) {
+        return item.name === searchTerm || item.role === searchTerm;
+      } else if (item instanceof Person) {
+        return item.name === searchTerm || item.city === searchTerm;
+      }
+    });
   }
 }
 
-let employeeData = new SearchableCollection(employees);
+let employeeData = new SearchableCollection<Employee>(employees);
 employeeData
   .find("Sales")
   .forEach((e) => console.log(`Employee ${e.name}, ${e.role}`));

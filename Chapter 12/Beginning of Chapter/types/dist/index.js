@@ -30,7 +30,14 @@ class SearchableCollection extends DataCollection {
         super(initialItems);
     }
     find(searchTerm) {
-        return this.items.filter((item) => item.name === searchTerm || item.role === searchTerm);
+        return this.items.filter((item) => {
+            if (item instanceof Employee) {
+                return item.name === searchTerm || item.role === searchTerm;
+            }
+            else if (item instanceof Person) {
+                return item.name === searchTerm || item.city === searchTerm;
+            }
+        });
     }
 }
 let employeeData = new SearchableCollection(employees);
