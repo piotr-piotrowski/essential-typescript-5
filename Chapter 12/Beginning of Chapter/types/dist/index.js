@@ -22,4 +22,6 @@ class PeopleCollection {
 let peopleData = new PeopleCollection(people);
 console.log(`Names: ${peopleData.getNames().join(", ")}`);
 let firstPerson = peopleData.getItem(0);
-console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
+if (firstPerson instanceof Person) {
+    console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
+}
