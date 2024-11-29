@@ -14,33 +14,17 @@ class DataCollection {
     constructor(intialItems) {
         this.items.push(...intialItems);
     }
-    collate(targetData, itemProp, targetProp) {
-        let results = [];
-        this.items.forEach((item) => {
-            let match = targetData.find((d) => d[targetProp] === item[itemProp]);
-            if (match !== undefined) {
-                results.push({ ...match, ...item });
-            }
-        });
-        return results;
+    // src/index.ts(22,56): error TS2693: 'V' only refers to a type, but is being used as a value here.
+    // filter<V extends T>(): V[] {
+    //    return this.items.filter((item) => item instanceof V) as V[];
+    // }
+    filter(predicate) {
+        return this.items.filter((item) => predicate(item));
     }
 }
-class SearchableCollection extends DataCollection {
-    constructor(initialItems) {
-        super(initialItems);
-    }
-    find(searchTerm) {
-        return this.items.filter((item) => {
-            if (item instanceof Employee) {
-                return item.name === searchTerm || item.role === searchTerm;
-            }
-            else if (item instanceof Person) {
-                return item.name === searchTerm || item.city === searchTerm;
-            }
-        });
-    }
+let mixedData = new DataCollection([...people, ...products]);
+function isProduct(target) {
+    return target instanceof Product;
 }
-let employeeData = new SearchableCollection(employees);
-employeeData
-    .find("Sales")
-    .forEach((e) => console.log(`Employee ${e.name}, ${e.role}`));
+let filteredProducts = mixedData.filter(isProduct);
+filteredProducts.forEach((p) => console.log(`Product: ${p.name}, ${p.price}`));
