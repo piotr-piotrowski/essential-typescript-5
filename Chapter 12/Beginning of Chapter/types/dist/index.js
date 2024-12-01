@@ -1,5 +1,5 @@
 import { Person } from "./dataTypes.js";
-class ArrayCollection {
+class PersonCollection {
     items = [];
     add(...newItems) {
         this.items.push(...newItems);
@@ -11,6 +11,6 @@ class ArrayCollection {
         return this.items.length;
     }
 }
-let peopleCollection = new ArrayCollection();
+let peopleCollection = new PersonCollection();
 peopleCollection.add(new Person("Bob Smith", "London"), new Person("Dora Peters", "New York"));
 console.log(`Collection size: ${peopleCollection.count}`);

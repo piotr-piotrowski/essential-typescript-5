@@ -8,16 +8,14 @@ interface Collection<T extends shapeType> {
   count: number;
 }
 
-class ArrayCollection<DataType extends shapeType>
-  implements Collection<DataType>
-{
-  private items: DataType[] = [];
+class PersonCollection implements Collection<Person> {
+  private items: Person[] = [];
 
-  add(...newItems): void {
+  add(...newItems: Person[]): void {
     this.items.push(...newItems);
   }
 
-  get(name: string): DataType {
+  get(name: string): Person {
     return this.items.find((item) => item.name === name);
   }
 
@@ -26,7 +24,7 @@ class ArrayCollection<DataType extends shapeType>
   }
 }
 
-let peopleCollection: Collection<Person> = new ArrayCollection<Person>();
+let peopleCollection: Collection<Person> = new PersonCollection();
 peopleCollection.add(
   new Person("Bob Smith", "London"),
   new Person("Dora Peters", "New York")
