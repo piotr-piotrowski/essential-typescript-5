@@ -1,25 +1,21 @@
-import { Person, Product } from "./dataTypes.js";
-class ArrayCollection {
-    items = [];
+import { Product } from "./dataTypes.js";
+let products = [new Product("Running Shoes", 100), new Product("Hat", 25)];
+class Collection {
+    items;
+    constructor(initialItems = []) {
+        this.items = new Set(initialItems);
+    }
     add(...newItems) {
-        this.items.push(...newItems);
+        newItems.forEach((newItem) => this.items.add(newItem));
+    }
+    get(name) {
+        return [...this.items.values()].find((item) => item.name === name);
     }
     get count() {
-        return this.items.length;
+        return this.items.size;
     }
 }
-class ProductCollection extends ArrayCollection {
-    get(searchTerm) {
-        return this.items.find(item => item.name === searchTerm);
-    }
-}
-class PersonCollection extends ArrayCollection {
-    get(searchTerm) {
-        return this.items.find(item => item.name === searchTerm || item.city === searchTerm);
-    }
-}
-let peopleCollection = new PersonCollection();
-peopleCollection.add(new Person("Bob Smith", "London"), new Person("Dora Peters", "New York"));
-let productCollection = new ProductCollection();
-productCollection.add(new Product("Running Shoes", 100), new Product("Hat", 25));
-[peopleCollection, productCollection].forEach(c => console.log(`Size: ${c.count}`));
+let productCollection = new Collection(products);
+console.log(`There are ${productCollection.count} products`);
+let p = productCollection.get("Hat");
+console.log(`Product: ${p.name}, ${p.price}`);
