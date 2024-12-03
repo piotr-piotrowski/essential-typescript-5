@@ -1,5 +1,4 @@
-let firstVal = "String Value";
-let secondVal = 100;
-export {};
-// src/index.ts(6,5): error TS2322: Type 'string' is not assignable to type 'number'.
-//let mismatchCheck: resultType<false> = "String Value";
+import { City, Person, Product } from "./dataTypes.js";
+let firstVal = new City("London", 8136000);
+let secondVal = new Person("Bob", "London");
+let thirdVal = new Product("Kayak", 275);
