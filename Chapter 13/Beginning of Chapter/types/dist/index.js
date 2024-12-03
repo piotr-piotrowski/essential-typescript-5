@@ -1,14 +1,6 @@
-import { Person, Product } from "./dataTypes.js";
-function FilterArray(data, predicate) {
-    return data.filter((item) => !predicate(item));
+import { Product } from "./dataTypes.js";
+function convertProduct(p) {
+    return { name: p.name, price: `$${p.price.toFixed(2)}` };
 }
-let dataArray = [
-    new Product("Kayak", 275),
-    new Person("Bob", "London"),
-    new Product("Lifejacket", 27.5),
-];
-function isProduct(item) {
-    return item instanceof Product;
-}
-let filteredData = FilterArray(dataArray, isProduct);
-filteredData.forEach((item) => console.log(`Person: ${item.name}`));
+let kayak = convertProduct(new Product("Kayak", 275));
+console.log(`Product: ${kayak.name}, ${kayak.price}`);
