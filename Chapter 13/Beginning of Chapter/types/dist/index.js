@@ -1,16 +1,14 @@
-import { Product } from "./dataTypes.js";
-class Collection {
-    items;
-    constructor(...initialItems) {
-        this.items = initialItems || [];
-    }
-    total(propName, format) {
-        let totalValue = this.items.reduce((t, item) => (t += Number(item[propName])), 0);
-        return format ? `$${totalValue.toFixed()}` : totalValue;
-    }
+import { Person, Product } from "./dataTypes.js";
+function FilterArray(data, predicate) {
+    return data.filter((item) => !predicate(item));
 }
-let data = new Collection(new Product("Kayak", 275), new Product("Lifejacket", 48.95));
-let firstVal = data.total("price", true);
-console.log(`Formatted value: ${firstVal}`);
-let secondVal = data.total("price", false);
-console.log(`Unformatted value: ${secondVal}`);
+let dataArray = [
+    new Product("Kayak", 275),
+    new Person("Bob", "London"),
+    new Product("Lifejacket", 27.5),
+];
+function isProduct(item) {
+    return item instanceof Product;
+}
+let filteredData = FilterArray(dataArray, isProduct);
+filteredData.forEach((item) => console.log(`Person: ${item.name}`));
