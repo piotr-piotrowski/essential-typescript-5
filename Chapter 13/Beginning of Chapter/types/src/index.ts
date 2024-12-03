@@ -1,14 +1,17 @@
 import { Product } from "./dataTypes.js";
 
-type changeProps<T, U, V> = {
-  [P in keyof T]: T[P] extends U ? V : T[P];
+type unionOfTypeNames<T, U> = {
+  [P in keyof T]: T[P] extends U ? P : never;
 };
 
-type modifiedProduct = changeProps<Product, number, string>;
+type propertiesOfType<T, U> = unionOfTypeNames<T, U>[keyof T];
 
-function convertProduct(p: Product): modifiedProduct {
-  return { name: p.name, price: `$${p.price.toFixed(2)}` };
+function total<T, P extends propertiesOfType<T, number>>(
+  data: T[],
+  propName: P
+): number {
+  return data.reduce((t, item) => (t += Number(item[propName])), 0);
 }
 
-let kayak = convertProduct(new Product("Kayak", 275));
-console.log(`Product: ${kayak.name}, ${kayak.price}`);
+let products = [new Product("Kayak", 275), new Product("Lifejacket", 48.95)];
+console.log(`Total: ${total(products, "price")}`);

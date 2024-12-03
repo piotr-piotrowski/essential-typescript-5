@@ -1,6 +1,6 @@
 import { Product } from "./dataTypes.js";
-function convertProduct(p) {
-    return { name: p.name, price: `$${p.price.toFixed(2)}` };
+function total(data, propName) {
+    return data.reduce((t, item) => (t += Number(item[propName])), 0);
 }
-let kayak = convertProduct(new Product("Kayak", 275));
-console.log(`Product: ${kayak.name}, ${kayak.price}`);
+let products = [new Product("Kayak", 275), new Product("Lifejacket", 48.95)];
+console.log(`Total: ${total(products, "price")}`);
