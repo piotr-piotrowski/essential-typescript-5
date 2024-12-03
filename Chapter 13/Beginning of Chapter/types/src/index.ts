@@ -1,12 +1,7 @@
-type CustomMapped<K extends keyof any, T> = {
-  [P in K]: T;
-};
+type resultType<T extends boolean> = T extends true ? string : number;
 
-let p1: CustomMapped<"name" | "city", string> = {
-  name: "Bob",
-  city: "London",
-};
-let p2: Record<"name" | "city", string> = { name: "Alice", city: "Paris" };
+let firstVal: resultType<true> = "String Value";
+let secondVal: resultType<false> = 100;
 
-console.log(`Custom mapped type: ${p1.name}, ${p1.city}`);
-console.log(`Built-in mapped type: ${p2.name}, ${p2.city}`);
+// src/index.ts(6,5): error TS2322: Type 'string' is not assignable to type 'number'.
+//let mismatchCheck: resultType<false> = "String Value";
