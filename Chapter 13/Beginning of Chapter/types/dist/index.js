@@ -1,8 +1,8 @@
-let p1 = { name: "Kayak" };
-let p2 = {
-    name: "Lifejacket",
-    price: 48.95,
+let p1 = {
+    name: "Bob",
+    city: "London",
 };
-console.log(`Custom mapped type: ${p1.name}`);
-console.log(`Built-in mapped type: ${p2.name}, ${p2.price}`);
+let p2 = { name: "Alice", city: "Paris" };
+console.log(`Custom mapped type: ${p1.name}, ${p1.city}`);
+console.log(`Built-in mapped type: ${p2.name}, ${p2.city}`);
 export {};
