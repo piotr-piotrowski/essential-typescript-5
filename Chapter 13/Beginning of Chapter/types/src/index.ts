@@ -1,17 +1,14 @@
 import { Product } from "./dataTypes.js";
 
-type unionOfTypeNames<T, U> = {
-  [P in keyof T]: T[P] extends U ? P : never;
-};
-
-type propertiesOfType<T, U> = unionOfTypeNames<T, U>[keyof T];
-
-function total<T, P extends propertiesOfType<T, number>>(
-  data: T[],
-  propName: P
-): number {
-  return data.reduce((t, item) => (t += Number(item[propName])), 0);
+function getValue<T, P extends keyof T>(data: T, propName: P): T[P] {
+  if (Array.isArray(data)) {
+    return data[0][propName];
+  } else {
+    return data[propName];
+  }
 }
 
 let products = [new Product("Kayak", 275), new Product("Lifejacket", 48.95)];
-console.log(`Total: ${total(products, "price")}`);
+// src/index.ts(12,48): error TS2345: Argument of type '"price"' is not assignable to parameter of type 'keyof Product[]'.
+// console.log(`Array Value: ${getValue(products, "price")}`);
+console.log(`Single Total: ${getValue(products[0], "price")}`);
