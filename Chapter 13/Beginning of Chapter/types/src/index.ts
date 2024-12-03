@@ -1,15 +1,16 @@
 import { Product } from "./dataTypes.js";
 
-type targetKeys<T> = T extends (infer U)[] ? keyof U : keyof T;
+type Result<T> = T extends (...args: any) => infer R ? R : never;
 
-function getValue<T, P extends targetKeys<T>>(data: T, propName: P): T[P] {
-  if (Array.isArray(data)) {
-    return data[0][propName];
-  } else {
-    return data[propName];
-  }
+function processArray<T, Func extends (T) => any>(
+  data: T[],
+  func: Func
+): Result<Func>[] {
+  return data.map((item) => func(item));
 }
 
+let selectName = (p: Product) => p.name;
+
 let products = [new Product("Kayak", 275), new Product("Lifejacket", 48.95)];
-console.log(`Array Value: ${getValue(products, "price")}`);
-console.log(`Single Total: ${getValue(products[0], "price")}`);
+let names: string[] = processArray(products, selectName);
+names.forEach((name) => console.log(`Name: ${name}`));
