@@ -2,14 +2,30 @@ import { City, Person, Product } from "./dataTypes.js";
 
 type resultType<T extends boolean> = T extends true ? string : number;
 
-type references = "London" | "Bob" | "Kayak";
+class Collection<T> {
+  private items: T[];
 
-type nestedType<T extends references> = T extends "London"
-  ? City
-  : T extends "Bob"
-  ? Person
-  : Product;
+  constructor(...initialItems: T[]) {
+    this.items = initialItems || [];
+  }
 
-let firstVal: nestedType<"London"> = new City("London", 8136000);
-let secondVal: nestedType<"Bob"> = new Person("Bob", "London");
-let thirdVal: nestedType<"Kayak"> = new Product("Kayak", 275);
+  total<P extends keyof T, U extends boolean>(
+    propName: P,
+    format: U
+  ): resultType<U> {
+    let totalValue = this.items.reduce(
+      (t, item) => (t += Number(item[propName])),
+      0
+    );
+    return format ? `$${totalValue.toFixed()}` : (totalValue as any);
+  }
+}
+
+let data = new Collection<Product>(
+  new Product("Kayak", 275),
+  new Product("Lifejacket", 48.95)
+);
+let firstVal: string = data.total("price", true);
+console.log(`Formatted value: ${firstVal}`);
+let secondVal: number = data.total("price", false);
+console.log(`Unformatted value: ${secondVal}`);
