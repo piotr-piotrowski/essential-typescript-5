@@ -32,16 +32,28 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
 };
+import { serialize } from "./classDecorator.js";
 import { time } from "./methodDecorator.js";
 let Product = (() => {
+    let _classDecorators = [serialize];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
     let _instanceExtraInitializers = [];
     let _getDetails_decorators;
-    return class Product {
+    let _getPrice_decorators;
+    var Product = class {
+        static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
             _getDetails_decorators = [time];
+            _getPrice_decorators = [time];
             __esDecorate(this, null, _getDetails_decorators, { kind: "method", name: "getDetails", static: false, private: false, access: { has: obj => "getDetails" in obj, get: obj => obj.getDetails }, metadata: _metadata }, null, _instanceExtraInitializers);
-            if (_metadata) Object.defineProperty(this, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+            __esDecorate(this, null, _getPrice_decorators, { kind: "method", name: "getPrice", static: false, private: false, access: { has: obj => "getPrice" in obj, get: obj => obj.getPrice }, metadata: _metadata }, null, _instanceExtraInitializers);
+            __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+            Product = _classThis = _classDescriptor.value;
+            if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+            __runInitializers(_classThis, _classExtraInitializers);
         }
         name = __runInitializers(this, _instanceExtraInitializers);
         price;
@@ -52,6 +64,10 @@ let Product = (() => {
         getDetails() {
             return `Name: ${this.name}, Price: $${this.price}`;
         }
+        getPrice() {
+            return this.price;
+        }
     };
+    return Product = _classThis;
 })();
 export { Product };
