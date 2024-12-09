@@ -5,12 +5,11 @@ type Config = {
 };
 
 export function time(config?: Config) {
-  return function <This, Args extends any[], Result extends string | number>(
-    method: (This, Args) => Result,
-    ctx: ClassMethodDecoratorContext<This, (This, Args) => Result>
-  ) {
+  return function (method, ctx: ClassMethodDecoratorContext) {
+    let start;
+    ctx.addInitializer(() => (start = performance.now()));
     const methodName = config?.label ?? String(ctx.name);
-    return function (this: This, ...args: Args): Result {
+    return function (this, ...args) {
       const start = performance.now();
       if (config?.time) {
         console.log(`${methodName} started`);

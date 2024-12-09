@@ -51,7 +51,8 @@ let Product = (() => {
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
             _getDetails_decorators = [time({
-                    replacement: () => "Hello, Decorator",
+                    // replacement: () => "Hello, Decorator",
+                    time: true,
                 })];
             _getPrice_decorators = [time({
                     label: "Product.getPrice",
