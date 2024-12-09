@@ -50,8 +50,13 @@ let Product = (() => {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
-            _getDetails_decorators = [time];
-            _getPrice_decorators = [time];
+            _getDetails_decorators = [time({
+                    replacement: () => "Hello, Decorator",
+                })];
+            _getPrice_decorators = [time({
+                    label: "Product.getPrice",
+                    time: true,
+                })];
             _tax_decorators = [autolog];
             __esDecorate(this, null, _getDetails_decorators, { kind: "method", name: "getDetails", static: false, private: false, access: { has: obj => "getDetails" in obj, get: obj => obj.getDetails }, metadata: _metadata }, null, _instanceExtraInitializers);
             __esDecorate(this, null, _getPrice_decorators, { kind: "method", name: "getPrice", static: false, private: false, access: { has: obj => "getPrice" in obj, get: obj => obj.getPrice }, metadata: _metadata }, null, _instanceExtraInitializers);
