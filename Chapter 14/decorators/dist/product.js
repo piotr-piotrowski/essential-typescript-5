@@ -32,9 +32,8 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
 };
-import { log } from "./accessorDecorator.js";
+import { autolog } from "./autoAccessorDecorator.js";
 import { serialize } from "./classDecorator.js";
-import { double } from "./fieldDecorator.js";
 import { time } from "./methodDecorator.js";
 let Product = (() => {
     let _classDecorators = [serialize];
@@ -42,27 +41,21 @@ let Product = (() => {
     let _classExtraInitializers = [];
     let _classThis;
     let _instanceExtraInitializers = [];
-    let _taxRate_decorators;
-    let _taxRate_initializers = [];
-    let _taxRate_extraInitializers = [];
     let _getDetails_decorators;
     let _getPrice_decorators;
-    let _get_tax_decorators;
-    let _set_tax_decorators;
+    let _tax_decorators;
+    let _tax_initializers = [];
+    let _tax_extraInitializers = [];
     var Product = class {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
-            _taxRate_decorators = [double];
             _getDetails_decorators = [time];
             _getPrice_decorators = [time];
-            _get_tax_decorators = [log];
-            _set_tax_decorators = [log];
+            _tax_decorators = [autolog];
             __esDecorate(this, null, _getDetails_decorators, { kind: "method", name: "getDetails", static: false, private: false, access: { has: obj => "getDetails" in obj, get: obj => obj.getDetails }, metadata: _metadata }, null, _instanceExtraInitializers);
             __esDecorate(this, null, _getPrice_decorators, { kind: "method", name: "getPrice", static: false, private: false, access: { has: obj => "getPrice" in obj, get: obj => obj.getPrice }, metadata: _metadata }, null, _instanceExtraInitializers);
-            __esDecorate(this, null, _get_tax_decorators, { kind: "getter", name: "tax", static: false, private: false, access: { has: obj => "tax" in obj, get: obj => obj.tax }, metadata: _metadata }, null, _instanceExtraInitializers);
-            __esDecorate(this, null, _set_tax_decorators, { kind: "setter", name: "tax", static: false, private: false, access: { has: obj => "tax" in obj, set: (obj, value) => { obj.tax = value; } }, metadata: _metadata }, null, _instanceExtraInitializers);
-            __esDecorate(null, null, _taxRate_decorators, { kind: "field", name: "taxRate", static: false, private: false, access: { has: obj => "taxRate" in obj, get: obj => obj.taxRate, set: (obj, value) => { obj.taxRate = value; } }, metadata: _metadata }, _taxRate_initializers, _taxRate_extraInitializers);
+            __esDecorate(this, null, _tax_decorators, { kind: "accessor", name: "tax", static: false, private: false, access: { has: obj => "tax" in obj, get: obj => obj.tax, set: (obj, value) => { obj.tax = value; } }, metadata: _metadata }, _tax_initializers, _tax_extraInitializers);
             __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
             Product = _classThis = _classDescriptor.value;
             if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
@@ -70,9 +63,10 @@ let Product = (() => {
         }
         name = __runInitializers(this, _instanceExtraInitializers);
         price;
-        taxRate = __runInitializers(this, _taxRate_initializers, 20);
+        // @double
+        // private taxRate: number = 20;
         constructor(name, price) {
-            __runInitializers(this, _taxRate_extraInitializers);
+            __runInitializers(this, _tax_extraInitializers);
             this.name = name;
             this.price = price;
         }
@@ -80,14 +74,19 @@ let Product = (() => {
             return `Name: ${this.name}, Price: $${this.getPrice()}`;
         }
         getPrice() {
-            return this.price * (1 + this.taxRate / 100);
+            return this.price * (1 + this.tax / 100);
         }
-        get tax() {
-            return this.taxRate;
-        }
-        set tax(newValue) {
-            this.taxRate = newValue;
-        }
+        #tax_accessor_storage = __runInitializers(this, _tax_initializers, 20);
+        // @log
+        // get tax() {
+        //   return this.taxRate;
+        // }
+        // @log
+        // set tax(newValue) {
+        //   this.taxRate = newValue;
+        // }
+        get tax() { return this.#tax_accessor_storage; }
+        set tax(value) { this.#tax_accessor_storage = value; }
     };
     return Product = _classThis;
 })();
