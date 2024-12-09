@@ -33,6 +33,7 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     done = true;
 };
 import { serialize } from "./classDecorator.js";
+import { double } from "./fieldDecorator.js";
 import { time } from "./methodDecorator.js";
 let Product = (() => {
     let _classDecorators = [serialize];
@@ -40,16 +41,21 @@ let Product = (() => {
     let _classExtraInitializers = [];
     let _classThis;
     let _instanceExtraInitializers = [];
+    let _taxRate_decorators;
+    let _taxRate_initializers = [];
+    let _taxRate_extraInitializers = [];
     let _getDetails_decorators;
     let _getPrice_decorators;
     var Product = class {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            _taxRate_decorators = [double];
             _getDetails_decorators = [time];
             _getPrice_decorators = [time];
             __esDecorate(this, null, _getDetails_decorators, { kind: "method", name: "getDetails", static: false, private: false, access: { has: obj => "getDetails" in obj, get: obj => obj.getDetails }, metadata: _metadata }, null, _instanceExtraInitializers);
             __esDecorate(this, null, _getPrice_decorators, { kind: "method", name: "getPrice", static: false, private: false, access: { has: obj => "getPrice" in obj, get: obj => obj.getPrice }, metadata: _metadata }, null, _instanceExtraInitializers);
+            __esDecorate(null, null, _taxRate_decorators, { kind: "field", name: "taxRate", static: false, private: false, access: { has: obj => "taxRate" in obj, get: obj => obj.taxRate, set: (obj, value) => { obj.taxRate = value; } }, metadata: _metadata }, _taxRate_initializers, _taxRate_extraInitializers);
             __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
             Product = _classThis = _classDescriptor.value;
             if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
@@ -57,15 +63,17 @@ let Product = (() => {
         }
         name = __runInitializers(this, _instanceExtraInitializers);
         price;
+        taxRate = __runInitializers(this, _taxRate_initializers, 20);
         constructor(name, price) {
+            __runInitializers(this, _taxRate_extraInitializers);
             this.name = name;
             this.price = price;
         }
         getDetails() {
-            return `Name: ${this.name}, Price: $${this.price}`;
+            return `Name: ${this.name}, Price: $${this.getPrice()}`;
         }
         getPrice() {
-            return this.price;
+            return this.price * (1 + this.taxRate / 100);
         }
     };
     return Product = _classThis;
