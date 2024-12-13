@@ -5,5 +5,6 @@
         "rootDir": "./src",
         "module": "Node16",
         "allowJs": true,
+        "checkJs": true,
     }
 }
