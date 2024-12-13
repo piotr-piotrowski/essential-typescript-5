@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/debug": "^4.1.12",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.7.2"
   },
