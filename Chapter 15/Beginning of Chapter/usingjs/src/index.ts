@@ -1,6 +1,7 @@
 import { Cart } from "./cart.js";
 import { SPORT, SportsProduct } from "./product.js";
 import { sizeFormatter, costFormatter, writeMessage } from "./formatters.js";
+import debug from "debug";
 
 let kayak = new SportsProduct(1, "Kayak", 275, SPORT.Watersports);
 let hat = new SportsProduct(2, "Hat", 22.1, SPORT.Running);
@@ -13,4 +14,7 @@ cart.addProduct(hat, 2);
 
 sizeFormatter("Cart", cart.itemCount);
 costFormatter("Cart", `${cart.totalPrice}`);
-writeMessage("Test Message");
+
+let db = debug("Example App", true)
+db.enabled = true
+db("Message: %s", "Test message")
