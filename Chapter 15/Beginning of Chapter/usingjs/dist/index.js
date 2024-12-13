@@ -9,6 +9,5 @@ cart.addProduct(kayak, 1);
 cart.addProduct(hat, 1);
 cart.addProduct(hat, 2);
 sizeFormatter("Cart", cart.itemCount);
-// writeMessage(`The ${thing} costs $${cost.toFixed(2)}`, true);
-//   TypeError: cost.toFixed is not a function
+// src/index.ts(17,23): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
 costFormatter("Cart", `${cart.totalPrice}`);
