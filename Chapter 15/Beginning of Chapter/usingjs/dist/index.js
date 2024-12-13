@@ -1,8 +1,8 @@
 import { Cart } from "./cart.js";
 import { SPORT, SportsProduct } from "./product.js";
-import { sizeFormatter, costFormatter } from "./formatters.js";
 import debug from "debug";
 import chalk from "chalk";
+import { costFormatter, sizeFormatter } from "./tsformatters.js";
 let kayak = new SportsProduct(1, "Kayak", 275, SPORT.Watersports);
 let hat = new SportsProduct(2, "Hat", 22.1, SPORT.Running);
 let ball = new SportsProduct(3, "Soccer Ball", 19.5, SPORT.Running);
