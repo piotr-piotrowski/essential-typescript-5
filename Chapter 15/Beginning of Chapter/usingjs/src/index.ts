@@ -12,4 +12,6 @@ cart.addProduct(hat, 1);
 cart.addProduct(hat, 2);
 
 sizeFormatter("Cart", cart.itemCount);
-costFormatter("Cart", cart.totalPrice);
+// writeMessage(`The ${thing} costs $${cost.toFixed(2)}`, true);
+//   TypeError: cost.toFixed is not a function
+costFormatter("Cart", `${cart.totalPrice}`);
