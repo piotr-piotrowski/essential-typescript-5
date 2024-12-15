@@ -3,7 +3,5 @@
         "target": "ES2022",
         "outDir": "./dist",
         "rootDir": "./src",
-        "jsx": "react",
-        "jsxFactory": "createElement"
     }
 }
