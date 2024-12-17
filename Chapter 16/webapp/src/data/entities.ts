@@ -28,8 +28,10 @@ export class Order {
       if (quantity === 0) {
         this.removeProduct(prod.id);
       } else {
-        this.lines.set(prod.id, new OrderLine(prod, quantity));
+        this.lines.get(prod.id)!.quantity += quantity;
       }
+    } else {
+      this.lines.set(prod.id, new OrderLine(prod, quantity));
     }
   }
 
