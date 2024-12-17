@@ -64,21 +64,5 @@
       "price": 1200
     }
   ],
-  "orders": [
-    {
-      "id": "de55",
-      "lines": [
-        {
-          "productId": "1",
-          "productName": "Kayak",
-          "quantity": 1
-        },
-        {
-          "productId": "3",
-          "productName": "Soccer Ball",
-          "quantity": 2
-        }
-      ]
-    }
-  ]
+  "orders": []
 }
