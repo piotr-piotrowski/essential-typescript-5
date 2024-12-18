@@ -7,7 +7,9 @@ export type Product = {
 };
 
 export class OrderLine {
-  constructor(public product: Product, public quantity: number) {}
+  constructor(public product: Product, public quantity: number) {
+    // no statements required
+  }
 
   get total(): number {
     return this.product.price * this.quantity;
@@ -34,7 +36,8 @@ export class Order {
       this.lines.set(prod.id, new OrderLine(prod, quantity));
     }
   }
-  removeProduct(id: number) {
+
+  public removeProduct(id: number) {
     this.lines.delete(id);
   }
 

@@ -1,8 +1,9 @@
-import { Injectable, numberAttribute } from '@angular/core';
-import { DataSourceImpl } from './dataSource';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import { Order, Product } from './entities';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DataSourceImpl } from './dataSource';
+import { Product, Order } from './entities';
 
 const protocol = 'http';
 const hostname = 'localhost';

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { Order, Product } from './entities';
 import { Injectable } from '@angular/core';
+import { Product, Order } from './entities';
 
 export type ProductProp = keyof Product;
 
@@ -23,10 +23,10 @@ export class DataSource {
   }
 
   getProducts(sortProp: ProductProp = 'id', category?: string): Product[] {
-    return this.selectedProducts(this._products, sortProp, category);
+    return this.selectProducts(this._products, sortProp, category);
   }
 
-  protected getData() {
+  protected getData(): void {
     this._products = [];
     this._categories.clear();
     this.impl.loadProducts().subscribe((rawData) => {
@@ -37,7 +37,7 @@ export class DataSource {
     });
   }
 
-  selectedProducts(
+  protected selectProducts(
     prods: Product[],
     sortProp: ProductProp,
     category?: string
